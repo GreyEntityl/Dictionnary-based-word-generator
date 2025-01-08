@@ -35,12 +35,12 @@ n=0
 print(parser.DATA)
 parser.reload(parser.getData().update(start={"count":0}))
 l=0
-#file=open(parser.DICT,"r",encoding="utf-8").read()
-#if file[0]=
-for line in open(parser.DICT,"r",encoding="utf-8").read()[n:].splitlines():
+file=open(parser.DICT,"r",encoding="utf-8").read()
+if file[0]=='\ufeff':
+    file=file[1:]
+for line in file.splitlines():
     i=0
     parser.reload()
-    print(line)
     if parser.KeyErrorHandler(line[0],parser.getData()["start"]):
         parser.getData()["start"].update({line[0]:0})
     parser.getData()["start"][line[0]]+=1
