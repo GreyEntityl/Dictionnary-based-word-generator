@@ -23,13 +23,21 @@ class Compiler:
         return list(self.DATA[self.LANGUAGE]["weights"][self.CurrentChar].keys())
 
 def main():
+    
+    print(" |=========================| ")
+    print(" |     Word generator      | ")
+    print(" |-------------------------| ")
+    print(" | Enter language          | ")
+    print(" |=========================| ")
+    LANG=input(">>> ")
+    
     print(" |=========================| ")
     print(" |     Word generator      | ")
     print(" |-------------------------| ")
     print(" | 0 : Undetermined length | ")
     print(" | 1 : Determined length   | ")
     print(" |=========================| ")
-    compiler=Compiler(currentchar="start",withcustomlength=int(input(">>> ")))
+    compiler=Compiler(currentchar="start",language=LANG,withcustomlength=int(input(">>> ")))
     compiler.loadData()
     
     length=0
