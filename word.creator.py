@@ -2,11 +2,12 @@ import json
 import random
 
 class Compiler:
-    def __init__(self,language:str="en",data:dict={},currentchar:str=""):
+    def __init__(self,language:str="en",data:dict={},currentchar:str="",withcustomlength:bool=False):
         self.LANGUAGE=language
         self.DATA=data
         self.CurrentChar=currentchar
         self.Output=""
+        self.withCustomLength=withcustomlength
     def getChar(self):
         return self.CurrentChar
     def getData(self):
@@ -21,20 +22,31 @@ class Compiler:
     def loadKeys(self):
         return list(self.DATA[self.LANGUAGE]["weights"][self.CurrentChar].keys())
 
-
-
-compiler=Compiler(currentchar="start")
-compiler.loadData()
-
-compiler.CurrentChar="start"
-while True:
-    if compiler.CurrentChar=="end":
-        break
+def main():
+    print(" |=========================| ")
+    print(" |     Word generator      | ")
+    print(" |-------------------------| ")
+    print(" | 0 : Undetermined length | ")
+    print(" | 1 : Determined length   | ")
+    print(" |=========================| ")
+    compiler=Compiler(currentchar="start",withcustomlength=int(input(">>> ")))
+    compiler.loadData()
+    length=0
+    if compiler.withCustomLength:
+        print(" | Type the length of your world | ")
+        length=int(input(">>> "))
+    compiler.CurrentChar="start"
+    while length>len(compiler.Output) or (not compiler.withCustomLength):
+        if compiler.withCustomLength and "end" in compiler.DATA[compiler.LANGUAGE]["weights"][compiler.CurrentChar].keys():
+            print(compiler.DATA[compiler.LANGUAGE]["weights"][compiler.CurrentChar]["end"])
+            del compiler.DATA[compiler.LANGUAGE]["weights"][compiler.CurrentChar]["end"]
+        char=''.join(random.choices(compiler.loadKeys(),weights=compiler.loadValues()))
+        if char=="end":
+            break
+        compiler.CurrentChar=char
+        compiler.Output+=compiler.CurrentChar
     
-    compiler.CurrentChar=''.join(random.choices(compiler.loadKeys(),weights=compiler.loadValues()))
-    if compiler.CurrentChar=="end":
-        break
-    compiler.Output+=compiler.CurrentChar
-    
 
-print(compiler.Output)
+    print(compiler.Output)
+if __name__=="__main__":
+    main()

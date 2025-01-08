@@ -2,7 +2,7 @@ import json
 import os
 
 class Parser:
-    def __init__(self,language="en",data={},DICT="dico.en.txt"):
+    def __init__(self,language="en",data={},DICT="dico.fr.txt"):
         self.LANGUAGE=language
         self.DATA=data
         self.DICT=DICT
