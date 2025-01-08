@@ -33,35 +33,48 @@ parser=Parser()
 parser.reload({"en":{}})
 n=0
 print(parser.DATA)
-parser.reload(parser.getData().update(start={"count":0}))
+print("Counting chars...")
+parser.reload(parser.getData().update({"counts":{"start":0},"chars":{"start":{}}}))
 l=0
 file=open(parser.DICT,"r",encoding="utf-8").read()
 if file[0]=='\ufeff':
     file=file[1:]
 for line in file.splitlines():
     i=0
-    parser.reload()
-    if parser.KeyErrorHandler(line[0],parser.getData()["start"]):
-        parser.getData()["start"].update({line[0]:0})
-    parser.getData()["start"][line[0]]+=1
-    parser.getData()["start"]["count"]+=1
+    if parser.KeyErrorHandler(line[0],parser.getData()["chars"]["start"]):
+        parser.getData()["chars"]["start"].update({line[0]:0})
+    parser.getData()["chars"]["start"][line[0]]+=1
+    parser.getData()["counts"]["start"]+=1
     l+=1
     for ch in line:
-        if parser.KeyErrorHandler(ch,parser.getData()):
-            parser.getData().update({ch:{"count":0}})
+        if parser.KeyErrorHandler(ch,parser.getData()["chars"]):
+            parser.getData()["chars"].update({ch:{}})
+            parser.getData()["counts"].update({ch:0})
         if i>=len(line)-1:
-            parser.getData()[ch]["count"]+=1
-            if parser.KeyErrorHandler("end",parser.getData()[ch]):
-                parser.getData()[ch].update(end=0)
-            parser.getData()[ch]["end"]+=1
+            parser.getData()["counts"][ch]+=1
+            if parser.KeyErrorHandler("end",parser.getData()["chars"][ch]):
+                parser.getData()["chars"][ch].update(end=0)
+            parser.getData()["chars"][ch]["end"]+=1
             i+=1
             continue
-        if parser.KeyErrorHandler(line[i+1],parser.getData()[ch]):
-            parser.getData()[ch].update({line[i+1]:0})
-        parser.getData()[ch]["count"]+=1
-        parser.getData()[ch][line[i+1]]+=1
+        if parser.KeyErrorHandler(line[i+1],parser.getData()["chars"][ch]):
+            parser.getData()["chars"][ch].update({line[i+1]:0})
+        parser.getData()["counts"][ch]+=1
+        parser.getData()["chars"][ch][line[i+1]]+=1
         i+=1
-
+print("Done")
 parser.reload()
-
-print(parser.DATA)
+print("Weights...")
+parser.getData().update(weights={})
+d=0
+for keys in parser.getData()["chars"].keys():
+    i=0
+    if parser.KeyErrorHandler(keys,parser.getData()["weights"]):
+        parser.getData()["weights"].update({keys:{}})
+    for key in parser.getData()["chars"][keys].keys():
+        if parser.KeyErrorHandler(key,parser.getData()["weights"][keys]):
+            parser.getData()["weights"][keys].update({key:{}})
+        parser.getData()["weights"][keys][key]=float(parser.getData()["chars"][keys][key]/parser.getData()["counts"][keys])
+        i+=1
+print("Done")
+parser.save()
