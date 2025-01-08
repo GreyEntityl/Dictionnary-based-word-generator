@@ -2,7 +2,7 @@ import json
 import os
 
 class Parser:
-    def __init__(self,language="fr",data={},DICT="dico.fr.txt"):
+    def __init__(self,language="en",data={},DICT="dico.en.txt"):
         self.LANGUAGE=language
         self.DATA=data
         self.DICT=DICT
@@ -32,13 +32,23 @@ class Parser:
 
 
 parser=Parser()
-print(parser.DATA)
+print(" |=========================| ")
+print(" |     Dict generator      | ")
+print(" |-------------------------| ")
+print(" | Enter file              | ")
+print(" |=========================| ")
+parser.DICT=input(">>> ")
+print(" |=========================| ")
+print(" |     Dict generator      | ")
+print(" |-------------------------| ")
+print(" | Enter language          | ")
+print(" |=========================| ")
+parser.LANGUAGE=input(">>> ")
 if parser.KeyErrorHandler(parser.LANGUAGE,parser.DATA):
     parser.loadData()
     parser.DATA.update({parser.LANGUAGE:{}})
     parser.save()
 n=0
-print(parser.DATA)
 print("Counting chars...")
 parser.reload(parser.getData().update({"counts":{"start":0},"chars":{"start":{}}}))
 l=0
