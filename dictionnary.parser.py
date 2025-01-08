@@ -35,9 +35,12 @@ n=0
 print(parser.DATA)
 parser.reload(parser.getData().update(start={"count":0}))
 l=0
-for line in open(parser.DICT,"r",encoding="utf-8").read()[1:].splitlines():
+#file=open(parser.DICT,"r",encoding="utf-8").read()
+#if file[0]=
+for line in open(parser.DICT,"r",encoding="utf-8").read()[n:].splitlines():
     i=0
     parser.reload()
+    print(line)
     if parser.KeyErrorHandler(line[0],parser.getData()["start"]):
         parser.getData()["start"].update({line[0]:0})
     parser.getData()["start"][line[0]]+=1
@@ -58,5 +61,7 @@ for line in open(parser.DICT,"r",encoding="utf-8").read()[1:].splitlines():
         parser.getData()[ch]["count"]+=1
         parser.getData()[ch][line[i+1]]+=1
         i+=1
+
+parser.reload()
 
 print(parser.DATA)
