@@ -41,15 +41,16 @@ def main():
     print(" |-------------------------| ")
     print(" | Number of words         | ")
     print(" |=========================| ")
-    d=int(input(">>>"))
+    d=int(input(">>> "))
     i=0
     while i<=d:
         compiler.Output=""
         compiler.CurrentChar="start"
         while length>len(compiler.Output) or (not compiler.withCustomLength):
             if compiler.withCustomLength and "end" in compiler.DATA[compiler.LANGUAGE]["weights"][compiler.CurrentChar].keys():
-                print(compiler.DATA[compiler.LANGUAGE]["weights"][compiler.CurrentChar]["end"])
-                del compiler.DATA[compiler.LANGUAGE]["weights"][compiler.CurrentChar]["end"]
+                if compiler.DATA[compiler.LANGUAGE]["weights"][compiler.CurrentChar]["end"] == 1.0:
+                    break
+                else: del compiler.DATA[compiler.LANGUAGE]["weights"][compiler.CurrentChar]["end"]
             char=''.join(random.choices(compiler.loadKeys(),weights=compiler.loadValues()))
             if char=="end":
                 break
