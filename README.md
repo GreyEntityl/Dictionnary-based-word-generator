@@ -2,6 +2,7 @@
 ----------
 ```bash
 git clone https://github.com/GreyEntityl/Dictionnary-based-word-generator
+cd Dictionnary-based-word-generator
 ```
 ```bash
 python3 dictionnary.parser.py
