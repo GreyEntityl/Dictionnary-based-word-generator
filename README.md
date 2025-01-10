@@ -12,4 +12,8 @@ python3 dictionnary.parser.py
 python3 word.generator.py
 ```
 ----------
-This dictionnary is based on the probability of a key to appears after another.
+This dictionnary is based on the probability of a key to comes after key.
+
+----------
+
+*Sorry for my bad english*
