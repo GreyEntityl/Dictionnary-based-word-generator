@@ -1,3 +1,5 @@
+# **Python dictionnary based word generator**
+----------
 **Requires dictionnary and python**
 ----------
 ```bash
