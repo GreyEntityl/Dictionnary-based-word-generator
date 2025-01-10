@@ -1,6 +1,6 @@
 # **Python dictionnary based word generator**
 ----------
-**Requires dictionnary and python**
+**Requires dictionnary file and [python](https://www.python.org/downloads)**
 ----------
 ```bash
 git clone https://github.com/GreyEntityl/Dictionnary-based-word-generator
