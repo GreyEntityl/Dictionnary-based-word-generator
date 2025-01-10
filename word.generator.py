@@ -51,6 +51,9 @@ def main():
     print(" |=========================| ")
     d=int(input(">>> "))
     i=0
+    print(" |=========================>>> ")
+    print(" |     Word generator      >>> ")
+    print(" |------------------------->>> ")
     while i<=d:
         compiler.Output=""
         compiler.CurrentChar="start"
@@ -66,8 +69,9 @@ def main():
             compiler.Output+=compiler.CurrentChar
     
 
-        print(compiler.Output)
+        print(" |",compiler.Output)
         i+=1
+    print(" |=========================>>> ")
 if __name__=="__main__":
     main()
     

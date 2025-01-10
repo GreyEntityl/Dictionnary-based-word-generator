@@ -1,8 +1,9 @@
 import json
 import os
+import time
 
 class Parser:
-    def __init__(self,language="en",data={},DICT="dico.en.txt"):
+    def __init__(self,language="words_alpha",data={},DICT="words_alpha.txt"):
         self.LANGUAGE=language
         self.DATA=data
         self.DICT=DICT
@@ -79,7 +80,10 @@ for line in file.splitlines():
         parser.getData()["chars"][ch][line[i+1]]+=1
         i+=1
 print("Done")
+print(f"Scaned lines : {l}")
+
 parser.reload()
+
 print("Weights...")
 parser.getData().update(weights={})
 d=0
