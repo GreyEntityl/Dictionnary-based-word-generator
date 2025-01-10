@@ -10,5 +10,5 @@ python3 dictionnary.parser.py
 ```bash
 python3 word.generator.py
 ```
-
+----------
 This dictionnary is based on the probability of a key to appears after another.
