@@ -38,13 +38,24 @@ print(" |     Dict generator      | ")
 print(" |-------------------------| ")
 print(" | Enter file              | ")
 print(" |=========================| ")
-parser.DICT=input(">>> ")
+inp=input(">>> ")
+parser.DICT="dico.en.txt" if inp=="" else inp
 print(" |=========================| ")
 print(" |     Dict generator      | ")
 print(" |-------------------------| ")
 print(" | Enter language          | ")
 print(" |=========================| ")
-parser.LANGUAGE=input(">>> ")
+inp=input(">>> ")
+parser.LANGUAGE=parser.DICT if inp == "" else inp
+print(" |=========================| ")
+print(" |     Word generator      | ")
+print(" |-------------------------| ")
+print(" | Del chars and counts ?  | ")
+print(" | 0 : Yes                 | ")
+print(" | 1 : No                  | ")
+print(" |=========================| ")
+inp=input(">>> ")
+remove_chars_and_counts = 0 if inp=="" else int(inp)
 if parser.KeyErrorHandler(parser.LANGUAGE,parser.DATA):
     parser.loadData()
     parser.DATA.update({parser.LANGUAGE:{}})
@@ -96,5 +107,8 @@ for keys in parser.getData()["chars"].keys():
             parser.getData()["weights"][keys].update({key:{}})
         parser.getData()["weights"][keys][key]=float(parser.getData()["chars"][keys][key]/parser.getData()["counts"][keys])
         i+=1
+if not remove_chars_and_counts:
+        del parser.getData()["chars"]
+        del parser.getData()["counts"]
 print("Done")
 parser.save()

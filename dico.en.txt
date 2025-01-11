@@ -103,7 +103,6 @@ aw
 away
 awfully
 az
-b
 ba
 back
 backed
@@ -163,7 +162,6 @@ bv
 bw
 by
 bz
-c
 c'mon
 c's
 ca
@@ -226,7 +224,6 @@ cv
 cx
 cy
 cz
-d
 dare
 daren't
 darent
@@ -268,7 +265,6 @@ downwards
 due
 during
 dz
-e
 each
 early
 ec
@@ -310,7 +306,6 @@ ex
 exactly
 example
 except
-f
 face
 faces
 fact
@@ -362,7 +357,6 @@ furthering
 furthermore
 furthers
 fx
-g
 ga
 gave
 gb
@@ -374,7 +368,7 @@ get
 gets
 getting
 gf
-gg
+gg 
 gh
 gi
 give
@@ -408,9 +402,9 @@ groups
 gs
 gt
 gu
+guy
 gw
 gy
-h
 had
 hadn't
 hadnt
@@ -476,7 +470,6 @@ html
 http
 hu
 hundred
-i
 i'd
 i'll
 i'm
@@ -731,7 +724,6 @@ null
 number
 numbers
 nz
-o
 obtain
 obtained
 obviously
