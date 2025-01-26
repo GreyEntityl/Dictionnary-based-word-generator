@@ -7,6 +7,12 @@ class Parser:
         self.LANGUAGE=language
         self.DATA=data
         self.DICT=DICT
+        self.STATS={"total":0}
+    def statsUpdate(self,ch):
+        if not ch in self.STATS.keys():
+            self.STATS.update({ch:[0,0]})
+        self.STATS[ch][0]+=1
+        self.STATS["total"]+=1
     def getData(self):
         return self.DATA[self.LANGUAGE]
     def save(self,data=None):
@@ -69,12 +75,14 @@ if file[0]=='\ufeff':
     file=file[1:]
 for line in file.splitlines():
     i=0
+    parser.statsUpdate(line[0])
     if parser.KeyErrorHandler(line[0],parser.getData()["chars"]["start"]):
         parser.getData()["chars"]["start"].update({line[0]:0})
     parser.getData()["chars"]["start"][line[0]]+=1
     parser.getData()["counts"]["start"]+=1
     l+=1
     for ch in line:
+        parser.statsUpdate(ch)
         if parser.KeyErrorHandler(ch,parser.getData()["chars"]):
             parser.getData()["chars"].update({ch:{}})
             parser.getData()["counts"].update({ch:0})
@@ -108,7 +116,14 @@ for keys in parser.getData()["chars"].keys():
         parser.getData()["weights"][keys][key]=float(parser.getData()["chars"][keys][key]/parser.getData()["counts"][keys])
         i+=1
 if not remove_chars_and_counts:
-        del parser.getData()["chars"]
-        del parser.getData()["counts"]
+    del parser.getData()["chars"]
+    del parser.getData()["counts"]
+    print("Chars and counts successfully removed")
 print("Done")
+for i in parser.STATS.keys():
+    if i=="total":continue
+    parser.STATS[i][1]=(parser.STATS[i][0]/parser.STATS["total"])*100
+print("| Stats :","V"*19)
+for i in parser.STATS.keys():
+    print("|",i,":",parser.STATS[i])
 parser.save()
