@@ -13,9 +13,3 @@ python dictionnary.parser.py
 ```bash
 python word.generator.py
 ```
-----------
-This dictionnary is based on the probability of a key to comes after a key.
-
-----------
-
-*Sorry for my bad english*
